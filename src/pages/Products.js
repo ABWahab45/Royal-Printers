@@ -13,7 +13,7 @@ const Products = () => {
         // Fetch products from the backend
         const productsResponse = await axios.get("http://localhost:5000/api/products");
         setProducts(productsResponse.data);
-
+//commit
         // Fetch media items that are images and have 'product' in the title
         const mediaResponse = await axios.get("http://localhost:5000/api/media");
         const productImages = mediaResponse.data.filter(
