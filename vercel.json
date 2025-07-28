@@ -1,7 +1,5 @@
 {
   "version": 2,
-  "buildCommand": "cd frontend && npm install && npm run build",
-  "outputDirectory": "frontend/build",
   "builds": [
     {
       "src": "backend/app.js",
@@ -19,7 +17,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "/frontend/build/index.html"
+      "dest": "/frontend/index.html"
     }
   ],
   "env": {
