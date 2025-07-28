@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+// Use environment variable or fallback to localhost for development
+// In production, use empty string to make requests to same domain
+// const API_URL = process.env.NODE_ENV === 'production' 
+//   ? (process.env.REACT_APP_API_URL || '') 
+//   : (process.env.REACT_APP_API_URL || 'http://localhost:5000');
+
+// For development - using localhost directly
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [media, setMedia] = useState([]);
@@ -11,11 +20,11 @@ const Products = () => {
     const fetchData = async () => {
       try {
         // Fetch products from the backend
-        const productsResponse = await axios.get("http://localhost:5000/api/products");
+        const productsResponse = await axios.get(`${API_URL}/api/products`);
         setProducts(productsResponse.data);
 //commit
         // Fetch media items that are images and have 'product' in the title
-        const mediaResponse = await axios.get("http://localhost:5000/api/media");
+        const mediaResponse = await axios.get(`${API_URL}/api/media`);
         const productImages = mediaResponse.data.filter(
           item => item.type === "image" && item.title.toLowerCase().includes("product")
         );
@@ -70,7 +79,7 @@ const Products = () => {
             {media.map(item => (
               <li key={item._id}>
                 <img
-                  src={`http://localhost:5000${item.filePath}`}
+                  src={`${API_URL}${item.filePath}`}
                   alt={item.title}
                   className="img-fluid rounded shadow-sm"
                 />

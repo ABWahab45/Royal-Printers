@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+// Use environment variable or fallback to localhost for development
+// In production, use empty string to make requests to same domain
+// const API_URL = process.env.NODE_ENV === 'production' 
+//   ? (process.env.REACT_APP_API_URL || '') 
+//   : (process.env.REACT_APP_API_URL || 'http://localhost:5000');
+
+// For development - using localhost directly
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+
 const Gallery = () => {
   const [media, setMedia] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -9,7 +18,7 @@ const Gallery = () => {
   useEffect(() => {
     const fetchMedia = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/media");
+        const response = await axios.get(`${API_URL}/api/media`);
         setMedia(response.data);
         setLoading(false);
       } catch (err) {
@@ -23,7 +32,7 @@ const Gallery = () => {
   }, []);
 
   const renderMediaItem = (item) => {
-    const serverUrl = "http://localhost:5000";
+    const serverUrl = API_URL;
     const fullPath = `${serverUrl}${item.filePath}`;
 
     if (item.type === "image") {

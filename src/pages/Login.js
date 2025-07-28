@@ -19,7 +19,15 @@ const Login = () => {
     }
     setLoading(true);
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/login", form);
+// Use environment variable or fallback to localhost for development
+// In production, use empty string to make requests to same domain
+// const API_URL = process.env.NODE_ENV === 'production' 
+//   ? (process.env.REACT_APP_API_URL || '') 
+//   : (process.env.REACT_APP_API_URL || 'http://localhost:5000');
+
+// For development - using localhost directly
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+      const res = await axios.post(`${API_URL}/api/auth/login`, form);
       login(res.data.token);
       setLoading(false);
       navigate("/");
@@ -47,4 +55,4 @@ const Login = () => {
   );
 };
 
-export default Login; 
+export default Login;

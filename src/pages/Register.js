@@ -23,7 +23,15 @@ const Register = () => {
     }
     setLoading(true);
     try {
-      await axios.post("http://localhost:5000/api/auth/register", { username: form.username, password: form.password });
+      // Use environment variable or fallback to localhost for development
+      // In production, use empty string to make requests to same domain
+      // const API_URL = process.env.NODE_ENV === 'production' 
+      //   ? (process.env.REACT_APP_API_URL || '') 
+      //   : (process.env.REACT_APP_API_URL || 'http://localhost:5000');
+
+      // For development - using localhost directly
+      const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+      await axios.post(`${API_URL}/api/auth/register`, { username: form.username, password: form.password });
       setSuccess("Register successful! Redirecting to login...");
       setLoading(false);
       setTimeout(() => navigate("/login"), 1500);
@@ -56,4 +64,4 @@ const Register = () => {
   );
 };
 
-export default Register; 
+export default Register;

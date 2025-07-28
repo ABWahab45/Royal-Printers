@@ -1,8 +1,14 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-// Use environment variable or fallback to localhost
-const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+// Use environment variable or fallback to localhost for development
+// In production, use empty string to make requests to same domain
+// const API_URL = process.env.NODE_ENV === 'production' 
+//   ? (process.env.REACT_APP_API_URL || '') 
+//   : (process.env.REACT_APP_API_URL || 'http://localhost:5000');
+
+// For development - using localhost directly
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
