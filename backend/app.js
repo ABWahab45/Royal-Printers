@@ -10,6 +10,7 @@ const mediaRoutes = require("./routes/media");
 const authRoutes = require("./routes/auth");
 const productRoutes = require("./routes/products");
 
+//dump commit
 // Load environment variables
 require('dotenv').config();
 
